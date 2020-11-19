@@ -15,7 +15,6 @@ let getLocation = () => {
 getLocation();
 
 let getValues = () => {
-  console.log('clicked');
   current_user.name = $('#nameInput').val();
   storeUser(current_user.name, current_user.lat || 0, current_user.long || 0, (new Date()).toString());
 }

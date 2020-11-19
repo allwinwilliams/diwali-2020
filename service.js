@@ -17,19 +17,6 @@ firebase.analytics();
 
 let database = firebase.database();
 
-// let rootRef = database.ref();
-//
-// let current_user = {
-//   name: 'allwin',
-//   lat: 20,
-//   long: 10,
-//   time: new Date()
-// };
-//
-// rootRef.push(current_user, () => {
-//   console.log('user pushed');
-// });
-
 function storeUser(name, lat, long, time) {
   let userId = name;
   firebase.database().ref('users').push({
@@ -40,7 +27,7 @@ function storeUser(name, lat, long, time) {
   });
 }
 
-function update_store(){
+function get_store(){
   firebase.database().ref('users').once('value')
     .then((snapshot) =>  {
       store = snapshot.val();
@@ -48,4 +35,4 @@ function update_store(){
     });
 }
 
-update_store();
+get_store();
