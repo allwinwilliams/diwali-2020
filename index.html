@@ -13,12 +13,12 @@
   </head>
   <body>
     <div class="user-input">
+      <label for="name">Fireworks!</label>
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="John Doe" />
-        <small id="nameHelp" class="form-text text-muted">enter some name</small>
+        <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="enter your name" />
+        <button class="btn btn-primary" onclick="getValues()">Submit</button>
+        <!-- <small id="nameHelp" class="form-text text-muted">enter some name</small> -->
       </div>
-      <button class="btn btn-primary" onclick="getValues()">Submit</button>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
