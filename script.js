@@ -1,0 +1,21 @@
+let current_user = {};
+
+let getLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      current_user.lat = position.coords.latitude;
+      current_user.long = position.coords.longitude;
+      console.log(position.coords);
+    });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+getLocation();
+
+let getValues = () => {
+  console.log('clicked');
+  let name = $('#nameInput').val();
+  storeUser(name, current_user.lat || 0, current_user.long || 0, (new Date()).toString());
+}
