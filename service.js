@@ -43,9 +43,9 @@ function storeUser(name, lat, long, time) {
 function update_store(){
   firebase.database().ref('users').once('value')
     .then((snapshot) =>  {
-    store = snapshot.val();
-    console.log(store);
-  });
+      store = snapshot.val();
+      console.log(store);
+    });
 }
 
 update_store();
