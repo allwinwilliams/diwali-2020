@@ -3,10 +3,10 @@
 // https://youtu.be/CKeyIbT3vXI
 
 class Firework {
-  constructor() {
+  constructor(x,y,z,hu, fw) {
 
-    this.hu = long_map; // colour range 
-    this.firework = new Particle(long_map, lat_map, 0, this.hu, true); // starting point
+    this.hu = hu; // colour range
+    this.firework = new Particle(x, y, z, this.hu, fw); // starting point
     this.exploded = false;
     this.particles = [];
   }
@@ -41,11 +41,11 @@ class Firework {
   }
 
   explode() {
-    let n = int(map(lat_map, 0,100, 1, 7)); // SHAPE - spokes
-    let d = int(map (long_map, 0, 100, 1, 7)); // SHAPE - loops
+    let n = int(map(y, 0, height, 1, 7)); // SHAPE - spokes
+    let d = int(map (x, 0, width, 1, 7)); // SHAPE - loops
     for (let i = 0; i < 241; i++) // no. of particles
       {
-      const p = new Particle(this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, this.hu, false, i, n,d);
+      const p = new Particle(this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, this.hu, false, i, n, d);
       this.particles.push(p);
     }
   }

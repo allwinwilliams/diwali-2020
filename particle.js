@@ -24,10 +24,10 @@ class Particle {
     this.hu = hu;
     this.acc = createVector(0, 0, 0);
     if (this.firework) {
-      this.vel = createVector(0, 40,0); // height of burst
+      this.vel = createVector(0, -12,0); // height of burst
     } else {
      this.vel = rose(map(index, 0, 120, 0, PI*4), map(index, 0,120, -2*PI, 2*PI), n, d);
-      this.vel.mult(60); // explode form
+      this.vel.mult(10); // explode form
     }
   }
 

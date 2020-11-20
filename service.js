@@ -32,6 +32,7 @@ function get_store(){
     .then((snapshot) =>  {
       store = snapshot.val();
       console.log(store);
+
     });
 }
 

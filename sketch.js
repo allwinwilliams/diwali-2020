@@ -19,7 +19,7 @@ function nameProcessing(name){
   return name.length || 0;
 }
 
-function renderFirework({name, lat, long, time}){
+function renderFirework({name, long, lat, time}){
   
   let user_time = new Date(time);
   let current_time = new Date();
@@ -27,20 +27,20 @@ function renderFirework({name, lat, long, time}){
   last_time.setDate(last_time.getDate() - 1);
 
   let name_value = nameProcessing(name);
-  long_map = map(long, LONG_MIN, LONG_MAX, 0, width);
-  lat_map = map(lat, LAT_MAX, LAT_MIN, 0, height);
+  x = map(long, LONG_MIN, LONG_MAX, 0, width);
+  y = map(lat, LAT_MAX, LAT_MIN, 0, height);
   let z = map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
-  // console.log(x, y);
-  console.log(long_map, lat_map, z);
+  //console.log(x, y, z);
   
-  //noStroke();
-  //fill('red');
-  //circle(long_map, lat_map, 10);
-  // text(name, long_map + 10, lat_map);
+	
+  	fireworks.push(new Firework(x,y,z, 30, true));
+ 	
+	for (let i = 0; i < 1; i++) {
+	    fireworks[i].update();
+	    fireworks[i].show();
+		}	
+	
 
-  let firework = new Firework(long_map, lat_map, z, 'white', true);
-  firework.update();
-  firework.show();
 }
 
 
@@ -72,15 +72,20 @@ function draw() {
   	background(0);
   	// rotateY(millis()/10000);
   	// rotateX(millis()/10000);
+  
    translate (-width/2, -height/2);
   	
   	noStroke();
+
+  	//placeholder, top left box:
 
   	fill('white');
   	push();
   	translate (-width/2, -height/2);
   	box(30);
   	pop();
+
+  	//placeholder, centre box:
   
   	fill('green');
   	push();
@@ -88,15 +93,18 @@ function draw() {
   	box(30);
   	pop();
 
- 
   // text(current_user.name, 100, 100);
   // text(current_user.lat, 100, 150);
   // text(current_user.long, 100, 200);
- 	// renderFireworks();
 
-	  _.mapValues(store, user => {
-	    renderFirework({...user});
-	    listRender = true;
-	  });
+ 	//renderFireworks();
+
+ 	//mapping values from store here because the renderFireworks function not working for some reason:
+ 	_.mapValues(store, user => {
+    renderFirework({...user});
+	});
+
+
+
 }
 
