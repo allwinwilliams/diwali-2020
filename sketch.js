@@ -1,4 +1,3 @@
-
 let listRender;
 
 const LAT_MIN = 5;
@@ -15,14 +14,14 @@ const CANVAS_HEIGHT = 500;
 
 let fireworks = [];
 let gravity;
-let col; 
+let col;
 
 function nameProcessing(name){
   return name.length || 0;
 }
 
 function renderFirework({name, long, lat, time}){
-  
+
   let user_time = new Date(time);
   let current_time = new Date();
   let last_time = new Date();
@@ -33,12 +32,9 @@ function renderFirework({name, long, lat, time}){
   y = map(lat, LAT_MAX, LAT_MIN, 0, height);
   let z = map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
   //console.log(x, y, z);
-  
-		
+
+
   fireworks.push(new Firework(x,y,z, 30, true));
- 	
-
-
 }
 
 
@@ -62,46 +58,41 @@ function setup() {
   easycam = createEasyCam();
   //easycam.zoom(-250);
   document.oncontextmenu = function() { return false; }
-
-
 }
 
 function draw() {
 	//colorMode(RGB);
-  	background(0);
-  	// rotateY(millis()/10000);
-  	// rotateX(millis()/10000);
-  
+	background(0);
+	// rotateY(millis()/10000);
+	// rotateX(millis()/10000);
+
    translate (-width/2, -height/2);
-  	
-  	noStroke();
 
-  	//placeholder, top left box:
+	noStroke();
 
-  	fill('white');
-  	push();
-  	translate (-width/2, -height/2);
-  	box(30);
-  	pop();
+	//placeholder, top left box:
 
-  	//placeholder, centre box:
-  
-  	fill('green');
-  	push();
-  	translate (width/2, height/2);
-  	box(30);
-  	pop();
+	fill('white');
+	push();
+	translate (-width/2, -height/2);
+	box(30);
+	pop();
+
+	//placeholder, centre box:
+
+	fill('green');
+	push();
+	translate (width/2, height/2);
+	box(30);
+  pop();
 
   // text(current_user.name, 100, 100);
   // text(current_user.lat, 100, 150);
   // text(current_user.long, 100, 200);
 
- 	renderFireworks();
+  renderFireworks();
 
-
-
- for (let i = fireworks.length - 1; i >= 0; i--) {
-
+  for (let i = fireworks.length - 1; i >= 0; i--) {
 	    fireworks[i].update();
 	    fireworks[i].show();
 
@@ -109,12 +100,7 @@ function draw() {
 	     // 	fireworks.splice(i, 1);
 	     // break;
 	  	// }
-
-	  console.log("i "+i);
-	  console.log("length " + fireworks.length);
-		
+	  // console.log("i "+i);
+	  // console.log("length " + fireworks.length);
     }
-
-
 }
-

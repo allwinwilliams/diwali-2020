@@ -28,16 +28,17 @@ function storeUser(name, lat, long, time) {
   });
 }
 
+firebase.database().ref('users').once('value')
+  .then((snapshot) =>  {
+    store = snapshot.val();
+    console.log(store);
+});
 
+firebase.database().ref('users').on("child_added", (snapshot, prevChildKey) => {
 
-
-function get_store(){
-  firebase.database().ref('users').once('value')
-    .then((snapshot) =>  {
-      store = snapshot.val();
-      console.log(store);
-
-    });
-}
-
-get_store();
+  var newLocation = snapshot.val();
+  console.log('new post added...')
+  console.log(snapshot.key);
+  console.log(newLocation);
+  store[snapshot.key] = newLocation;
+});

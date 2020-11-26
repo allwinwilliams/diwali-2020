@@ -5,6 +5,7 @@ let getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       current_user.lat = position.coords.latitude;
       current_user.long = position.coords.longitude;
+      console.log("got location");
       console.log(position.coords);
     });
   } else {
