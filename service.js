@@ -1,4 +1,5 @@
 let store = {};
+
 let keys = [];
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,7 +20,6 @@ firebase.analytics();
 let database = firebase.database();
 
 function storeUser(name, lat, long, time) {
-  let userId = name;
   firebase.database().ref('users').push({
     name,
     lat,
@@ -38,7 +38,6 @@ firebase.database().ref('users').once('value')
 });
 
 firebase.database().ref('users').on("child_added", (snapshot, prevChildKey) => {
-
   var newLocation = snapshot.val();
   console.log('new post added...')
   console.log(snapshot.key);

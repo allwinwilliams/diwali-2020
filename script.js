@@ -17,5 +17,6 @@ getLocation();
 
 let getValues = () => {
   current_user.name = $('#nameInput').val();
-  storeUser(current_user.name, current_user.lat || 0, current_user.long || 0, (new Date()).toString());
+  current_user.time = (new Date()).toString();
+  storeUser(current_user.name, current_user.lat, current_user.long, current_user.time);
 }

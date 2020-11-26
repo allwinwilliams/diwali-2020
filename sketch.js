@@ -1,4 +1,3 @@
-
 const LAT_MIN = 8;
 const LAT_MAX = 37;
 const LONG_MIN = 69;
@@ -23,7 +22,6 @@ function nameProcessing(name){
 }
 
 function renderFirework({name, long, lat, time}){
-
   let user_time = new Date(time);
   let current_time = new Date();
   let last_time = new Date();
@@ -79,22 +77,27 @@ function draw() {
 	box(30);
   pop();
 
-
   // text(current_user.name, 100, 100);
   // text(current_user.lat, 100, 150);
   // text(current_user.long, 100, 200);
 
   renderFireworks(store);
 
-  for (let i = fireworks.length - 1; i >= 0; i--) {
-	    fireworks[i].update();
-	    fireworks[i].show();
+  // for (let i = fireworks.length - 1; i >= 0; i--) {
+	//     fireworks[i].update();
+	//     fireworks[i].show();
+  //
+	//      // if (fireworks[i].done()) {
+	//      // 	fireworks.splice(i, 1);
+	//      // break;
+	//   	// }
+	//   // console.log("i "+i);
+	//   // console.log("length " + fireworks.length);
+  //   }
 
-	     // if (fireworks[i].done()) {
-	     // 	fireworks.splice(i, 1);
-	     // break;
-	  	// }
-	  // console.log("i "+i);
-	  // console.log("length " + fireworks.length);
-    }
+  _.map(fireworks, firework => {
+    firework.update();
+    firework.show();
+  });
+
 }
