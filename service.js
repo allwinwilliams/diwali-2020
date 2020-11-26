@@ -1,4 +1,5 @@
 let store = {};
+let keys = [];
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
@@ -26,6 +27,9 @@ function storeUser(name, lat, long, time) {
     time
   });
 }
+
+
+
 
 function get_store(){
   firebase.database().ref('users').once('value')

@@ -38,7 +38,7 @@ class Particle {
   update() {
     if (!this.firework) {
       this.vel.mult(0.9);
-      //this.lifespan -= 4; //stay on screen
+      // this.lifespan -= 4; //rate of removal from screen
     }
     this.vel.add(this.acc);
     this.pos.add(this.vel);

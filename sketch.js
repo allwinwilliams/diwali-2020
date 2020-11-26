@@ -1,5 +1,6 @@
 
-let listRender = false;
+let listRender;
+
 const LAT_MIN = 5;
 const LAT_MAX = 40;
 const LONG_MIN = 65;
@@ -14,6 +15,7 @@ const CANVAS_HEIGHT = 500;
 
 let fireworks = [];
 let gravity;
+let col; 
 
 function nameProcessing(name){
   return name.length || 0;
@@ -32,29 +34,26 @@ function renderFirework({name, long, lat, time}){
   let z = map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
   //console.log(x, y, z);
   
-	
-  	fireworks.push(new Firework(x,y,z, 30, true));
+		
+  fireworks.push(new Firework(x,y,z, 30, true));
  	
-	for (let i = 0; i < 1; i++) {
-	    fireworks[i].update();
-	    fireworks[i].show();
-		}	
-	
+
 
 }
 
 
 function renderFireworks(){
   //take the store and call renderFirework() for each
-  if(listRender == true) return;
+  if(listRender == false) {
   _.mapValues(store, user => {
     renderFirework({...user});
     listRender = true;
-  });
+  }); }
 }
 
 
 function setup() {
+  listRender = false;
   createCanvas(windowWidth, CANVAS_HEIGHT, WEBGL);
   colorMode(HSB);
   background(0);
@@ -97,13 +96,24 @@ function draw() {
   // text(current_user.lat, 100, 150);
   // text(current_user.long, 100, 200);
 
- 	//renderFireworks();
+ 	renderFireworks();
 
- 	//mapping values from store here because the renderFireworks function not working for some reason:
- 	_.mapValues(store, user => {
-    renderFirework({...user});
-	});
 
+
+ for (let i = fireworks.length - 1; i >= 0; i--) {
+
+	    fireworks[i].update();
+	    fireworks[i].show();
+
+	     // if (fireworks[i].done()) {
+	     // 	fireworks.splice(i, 1);
+	     // break;
+	  	// }
+
+	  console.log("i "+i);
+	  console.log("length " + fireworks.length);
+		
+    }
 
 
 }
