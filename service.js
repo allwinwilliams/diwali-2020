@@ -31,6 +31,9 @@ function storeUser(name, lat, long, time) {
 firebase.database().ref('users').once('value')
   .then((snapshot) =>  {
     store = snapshot.val();
+    _.map(store, (user) =>{
+      user.added = false;
+    });
     console.log(store);
 });
 
@@ -40,5 +43,6 @@ firebase.database().ref('users').on("child_added", (snapshot, prevChildKey) => {
   console.log('new post added...')
   console.log(snapshot.key);
   console.log(newLocation);
+  newLocation.added = false;
   store[snapshot.key] = newLocation;
 });

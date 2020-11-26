@@ -7,8 +7,8 @@ function rose(theta, gamma, n=5, d=8)
   let y = r*cos(theta) // rotation of each particle
   let x = r*sin(theta)
   let z = r*sin(gamma*k); // gamma var contrib by Archit
-  return createVector(x, y, z); 
-  
+  return createVector(x, y, z);
+
 }
 
 // Daniel Shiffman
@@ -24,10 +24,10 @@ class Particle {
     this.hu = hu;
     this.acc = createVector(0, 0, 0);
     if (this.firework) {
-      this.vel = createVector(0, -12,0); // height of burst
+      this.vel = createVector(0, -1,0); // height of burst
     } else {
      this.vel = rose(map(index, 0, 120, 0, PI*4), map(index, 0,120, -2*PI, 2*PI), n, d);
-      this.vel.mult(10); // explode form
+      this.vel.mult(1); // explode form
     }
   }
 
@@ -62,14 +62,14 @@ class Particle {
     if (!this.firework) {  // for the burst
       strokeWeight(5);
       stroke(this.hu, 255, 255, this.lifespan); //[HSB, Alpha]
-      
+
     } else {  // for the rocket
       strokeWeight(5);
       stroke(this.hu, 255, 255);
     }
-    
+
    point(this.pos.x, this.pos.y, this.pos.z);
-   
+
   }
-  
+
 }

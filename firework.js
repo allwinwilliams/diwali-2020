@@ -35,16 +35,16 @@ class Firework {
       this.particles[i].update();
 
       if (this.particles[i].done()) {
-        this.particles.splice(i, 1); 
+        this.particles.splice(i, 1);
       }
     }
   }
 
   explode() {
-    let n = int(map(y, 0, height, 1, 7)); // SHAPE - spokes
-    let d = int(map (x, 0, width, 1, 7)); // SHAPE - loops
+    let n = int(map(y, -MAP_HEIGHT/2, MAP_HEIGHT/2, 1, 7)); // SHAPE - spokes
+    let d = int(map (x, -MAP_WIDTH/2, MAP_WIDTH/2, 1, 7)); // SHAPE - loops
     for (let i = 0; i < 241; i++) // no. of particles
-      {
+    {
       const p = new Particle(this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, this.hu, false, i, n, d);
       this.particles.push(p);
     }
