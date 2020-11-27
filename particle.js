@@ -27,7 +27,7 @@ class Particle {
     } else {
       this.sketch.angleMode(this.sketch.RADIANS);
       this.vel = rose(this.sketch, this.sketch.map(index, 0, 120, 0, this.sketch.PI*4), this.sketch.map(index, 0,120, -2*this.sketch.PI, 2*this.sketch.PI), n, d);
-      this.vel.mult(2); // explode form
+      this.vel.mult(1); // explode form
     }
   }
 
@@ -57,7 +57,7 @@ class Particle {
     this.sketch.colorMode(this.sketch.HSB);
 
     if (!this.firework) {  // for the burst
-      this.sketch.strokeWeight(10);
+      this.sketch.strokeWeight(3);
       this.sketch.stroke(col, 255, 255, this.lifespan); //[HSB, Alpha]
 
     } else {  // for the rocket

@@ -20,7 +20,22 @@ firebase.analytics();
 let database = firebase.database();
 
 function storeUser(name, lat, long, time) {
-  firebase.database().ref('users').push({
+  let stored = firebase.database().ref('users').push({
+    name,
+    lat,
+    long,
+    time
+  });
+  current_user.key = stored.key;
+  current_user.added = false;
+}
+
+function updateUser(key, name, lat, long, time){
+  // var updates = {};
+  // updates['/users/' + key] = postData;
+  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  //
+  firebase.database().ref(`/users/${key}`).update({
     name,
     lat,
     long,

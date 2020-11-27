@@ -1,28 +1,27 @@
 // Daniel Shiffman
 // http://codingtra.in
 // https://youtu.be/CKeyIbT3vXI
+const HUE_MIN = 0;
+const HUE_MAX = 255;
 
 class Firework {
-  constructor(sketch, x, y, z, gravity, hu1, hu2, namelength, fw) {
+  constructor(sketch, x, y, z, gravity, namelength, fw) {
     this.sketch = sketch;
-    this.hu1 = hu1*namelength/20; // colour range
-    this.hu2 = hu2;
+    this.x = x;
+    this.y = y;
+    this.hu1 = sketch.map(this.x, -MAP_WIDTH/2, MAP_WIDTH/2, HUE_MIN, HUE_MAX); // colour range
+    this.hu2 = sketch.map(this.y, -MAP_HEIGHT/2, MAP_HEIGHT/2, HUE_MIN, HUE_MAX);
     this.namelength = namelength;
     this.firework = new Particle(this.sketch, x, 0, y, this.namelength, fw, z); // starting point
     this.exploded = false;
     this.particles = [];
-    this.x = x;
-    this.y = y;
+
     this.burst_height = z;
     this.gravity = gravity;
   }
 
   done() {
-    if (this.exploded && this.particles.length === 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.exploded && this.particles.length === 0;
   }
 
   update() {
@@ -35,7 +34,6 @@ class Firework {
         this.explode();
       }
     }
-
     _.map(this.particles, (particle, index) => {
       // particle.applyForce(gravity); // falls after bursting
       particle.update();
@@ -44,11 +42,9 @@ class Firework {
   }
 
   explode() {
-
     let n = this.sketch.int(this.sketch.map(this.y + this.namelength*10, -MAP_HEIGHT/2, MAP_HEIGHT/2 + 200, 1, 7)); // SHAPE - spokes
     let d = this.sketch.int(this.sketch.map (this.x, -MAP_WIDTH/2, MAP_WIDTH/2, 1, 7)); // SHAPE - loops
-    for (let i = 0; i < 241; i++) // no. of particles
-    {
+    for (let i = 0; i < 241; i++) {
       const p = new Particle(this.sketch, this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, false, i, n, d);
       this.particles.push(p);
     }
@@ -56,12 +52,11 @@ class Firework {
 
   show() {
     let col;
-    if (!this.exploded) {
+    if(!this.exploded){
       this.firework.show();
     }
-
     _.map(this.particles, (particle, index) => {
       particle.show((index % 2 == 0)? this.hu1 : this.hu2);
-    })
+    });
   }
 }
