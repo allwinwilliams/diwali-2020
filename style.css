@@ -16,9 +16,13 @@ canvas {
 }
 
 .btn {
-	
+
 }
 
 .form-control {
 	max-width: 200px;
+}
+.sketch{}
+.sketch canvas{
+  position: absolute;
 }

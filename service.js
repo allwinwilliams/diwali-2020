@@ -26,6 +26,7 @@ function storeUser(name, lat, long, time) {
     long,
     time
   });
+  current_user.added = false;
 }
 
 firebase.database().ref('users').once('value')

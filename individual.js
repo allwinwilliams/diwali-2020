@@ -1,30 +1,11 @@
-const LAT_MIN = 8;
-const LAT_MAX = 37;
-const LONG_MIN = 69;
-const LONG_MAX = 97;
-const TIME_MIN = 0;
-const TIME_MAX = 30;
-const HUE_MIN = 0;
-const HUE_MAX = 255;
-
-const CANVAS_WIDTH = 0;
-const CANVAS_HEIGHT = 0;
-
-const MAP_WIDTH = 10 * (LONG_MAX - LONG_MIN);
-const MAP_HEIGHT = 10 * (LAT_MAX - LAT_MIN);
-
-var indiaSketch = function(sketch){
-  let fireworks = [];
+var userSketch = function(sketch){
+  let firework;
   let gravity;
   let col = true;
   let start_x; let start_y; let burst_height;
 
-  sketch.preload = function() {
-    img = sketch.loadImage('indiamap.png');
-  }
-
-  sketch.setup = function() {
-    sketch.createCanvas(sketch.windowWidth, sketch.windowHeight, sketch.WEBGL);
+  sketch.setup =function() {
+    sketch.createCanvas(250, 250, sketch.WEBGL);
     sketch.colorMode(sketch.HSB);
     sketch.background(0);
     gravity = sketch.createVector(0, 0.2, 0);
@@ -34,25 +15,11 @@ var indiaSketch = function(sketch){
     document.oncontextmenu = function(){ return false; }
   }
 
-  sketch.draw = function () {
-  	sketch.background(0);
+  sketch.draw =function () {
+  	sketch.background('grey');
   	sketch.smooth()
 
-  	sketch.noFill();
-  	sketch.noStroke();
-   	sketch.strokeWeight(2);
-   	sketch.texture(img);
-   	sketch.textureMode(sketch.NORMAL);
-
-    sketch.push();
-    sketch.angleMode(sketch.DEGREES);
-    sketch.rotateX(70);
-    sketch.rotateZ(-10);
-    sketch.rotateY(5);
-    sketch.plane(MAP_WIDTH, MAP_HEIGHT);
-    sketch.pop();
-
-    sketch.renderFireworks(store);
+    sketch.renderFirework(current_user);
   }
 
   sketch.nameProcessing = function (name){
@@ -60,15 +27,18 @@ var indiaSketch = function(sketch){
     return namelength || 0;
   }
 
-  sketch.renderFirework = function (location){
-    if(location.added == true) {
+  sketch.renderFirework = function(location){
+    if(!location.name){
+      return;
+    }
+
+    if(location.added == true){
       location.firework.update();
       location.firework.show();
       return;
     }
-
-    let {name, long, lat, time} = {...location};
-
+    
+    let {name, long, lat, time} = location;
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
@@ -83,17 +53,10 @@ var indiaSketch = function(sketch){
     let hu2 = sketch.map(lat, LAT_MIN, LAT_MAX, HUE_MIN, HUE_MAX);
     let nl = sketch.nameProcessing(name);
     console.log("namelength "+nl);
+
     location.firework = new Firework(sketch, start_x, start_y, burst_height, gravity, hu1, hu2, nl, true);
     location.added = true;
   }
-
-  sketch.renderFireworks = function (location_store){
-    //take the store and call renderFirework() for each
-      _.mapValues(location_store, location => {
-        sketch.renderFirework(location, {...location});
-      });
-  }
 }
 
-
-new p5(indiaSketch, 'india-sketch-container');
+new p5(userSketch, 'user-sketch-container');
