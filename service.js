@@ -2,7 +2,7 @@ let store = {};
 
 let keys = [];
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional...
 var firebaseConfig = {
   apiKey: "AIzaSyDeBSykwrmtb7MYUjdgv3l1amrXkeMnaw4",
   authDomain: "diwali2020-10ba6.firebaseapp.com",
@@ -31,17 +31,12 @@ function storeUser(name, lat, long, time) {
 }
 
 function updateUser(key, name, lat, long, time){
-  // var updates = {};
-  // updates['/users/' + key] = postData;
-  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-  //
-  firebase.database().ref(`/users/${key}`).update({
+  firebase.database().ref(`/${users/${}`).update({
     name,
     lat,
     long,
     time
   });
-  current_user.added = false;
 }
 
 firebase.database().ref('users').once('value')
