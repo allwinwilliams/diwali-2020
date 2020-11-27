@@ -31,7 +31,7 @@ function storeUser(name, lat, long, time) {
 }
 
 function updateUser(key, name, lat, long, time){
-  firebase.database().ref(`/${users/${}`).update({
+  firebase.database().ref(`/users/${key}`).update({
     name,
     lat,
     long,
