@@ -17,6 +17,7 @@ const MAP_HEIGHT = 10 * (LAT_MAX - LAT_MIN);
 let fireworks = [];
 let gravity;
 let col;
+let start_x; let start_y; let burst_height;
 
 function nameProcessing(name){
   return name.length || 0;
@@ -30,12 +31,12 @@ function renderFirework({name, long, lat, time}){
   last_time.setDate(last_time.getDate() - 1);
 
   let name_value = nameProcessing(name);
-  x = map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
-  y = map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
-  let z = map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
+  start_x = map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
+  start_y = map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
+  burst_height = map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
   //console.log(x, y, z);
 
-  fireworks.push(new Firework(x,y,z, 30, true));
+  fireworks.push(new Firework(start_x,start_y,burst_height, 30, true));
 }
 
 
@@ -69,15 +70,14 @@ function draw() {
   // plane(100, 60);
 
   noFill();
-  plane(MAP_WIDTH, MAP_HEIGHT);
+  strokeWeight(2);
 
-	noStroke();
-	//placeholder, centre box:
-  fill('white');
-	push();
-	// translate(width/2, height/2);
-	box(30);
-  pop();
+    push();
+    angleMode(DEGREES);
+    rotateX(60);
+    plane(MAP_WIDTH, MAP_HEIGHT);
+    pop();
+ 
 
 
   // text(current_user.name, 100, 100);
@@ -89,12 +89,5 @@ function draw() {
   for (let i = fireworks.length - 1; i >= 0; i--) {
 	    fireworks[i].update();
 	    fireworks[i].show();
-
-	     // if (fireworks[i].done()) {
-	     // 	fireworks.splice(i, 1);
-	     // break;
-	  	// }
-	  // console.log("i "+i);
-	  // console.log("length " + fireworks.length);
     }
 }

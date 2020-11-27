@@ -6,9 +6,12 @@ class Firework {
   constructor(x,y,z,hu, fw) {
 
     this.hu = hu; // colour range
-    this.firework = new Particle(x, y, z, this.hu, fw); // starting point
+    this.firework = new Particle(x, 0, y, this.hu, fw); // starting point
     this.exploded = false;
     this.particles = [];
+    this.x = x;
+    this.y = y;
+    this.burst_height = z;
   }
 
   done() {
@@ -41,8 +44,9 @@ class Firework {
   }
 
   explode() {
-    let n = int(map(y, -MAP_HEIGHT/2, MAP_HEIGHT/2, 1, 7)); // SHAPE - spokes
-    let d = int(map (x, -MAP_WIDTH/2, MAP_WIDTH/2, 1, 7)); // SHAPE - loops
+
+    let n = int(map(this.y, -MAP_HEIGHT/2, MAP_HEIGHT/2, 1, 7)); // SHAPE - spokes
+    let d = int(map (this.x, -MAP_WIDTH/2, MAP_WIDTH/2, 1, 7)); // SHAPE - loops
     for (let i = 0; i < 241; i++) // no. of particles
     {
       const p = new Particle(this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, this.hu, false, i, n, d);

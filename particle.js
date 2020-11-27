@@ -2,11 +2,14 @@
 
 function rose(theta, gamma, n=5, d=8)
 {
-  let k = n/d
-  let r = cos(k*theta)
-  let y = r*cos(theta) // rotation of each particle
-  let x = r*sin(theta)
-  let z = r*sin(gamma*k); // gamma var contrib by Archit
+  let k = n/d;
+  console.log("n " +n);
+  console.log("d " +d);
+  console.log("k " +k);
+  let r = cos(k*theta);
+  let x = r*cos(theta); // rotation of each particle
+  let z = r*sin(theta);
+  let y = r*sin(gamma*k); // gamma var contrib by Archit
   return createVector(x, y, z);
 
 }
@@ -24,10 +27,11 @@ class Particle {
     this.hu = hu;
     this.acc = createVector(0, 0, 0);
     if (this.firework) {
-      this.vel = createVector(0, -1,0); // height of burst
+      this.vel = createVector(0, -2*burst_height/10,0); // height of burst
     } else {
+      angleMode(RADIANS);
      this.vel = rose(map(index, 0, 120, 0, PI*4), map(index, 0,120, -2*PI, 2*PI), n, d);
-      this.vel.mult(1); // explode form
+      this.vel.mult(2); // explode form
     }
   }
 
