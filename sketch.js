@@ -4,7 +4,7 @@ const LAT_MAX = 37;
 const LONG_MIN = 69;
 const LONG_MAX = 97;
 const TIME_MIN = 0;
-const TIME_MAX = 100;
+const TIME_MAX = 30;
 const HUE_MIN = 0;
 const HUE_MAX = 255;
 
@@ -16,11 +16,12 @@ const MAP_HEIGHT = 10 * (LAT_MAX - LAT_MIN);
 
 let fireworks = [];
 let gravity;
-let col;
+let col = true;
 let start_x; let start_y; let burst_height;
 
 function nameProcessing(name){
-  return name.length || 0;
+	let namelength = str(name).length;
+  return namelength || 0;
 }
 
 function renderFirework({name, long, lat, time}){
@@ -34,9 +35,14 @@ function renderFirework({name, long, lat, time}){
   start_x = map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
   start_y = map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
   burst_height = map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
-  //console.log(x, y, z);
+ // console.log(burst_height);
+  let hu1 = map(long, LONG_MIN, LONG_MAX, HUE_MIN, HUE_MAX);
+  let hu2 = map(lat, LAT_MIN, LAT_MAX, HUE_MIN, HUE_MAX);
+  let nl = nameProcessing(name);
+  console.log("namelength "+nl);
 
-  fireworks.push(new Firework(start_x,start_y,burst_height, 30, true));
+
+  fireworks.push(new Firework(start_x, start_y, burst_height, hu1, hu2, nl, true));
 }
 
 
@@ -51,6 +57,10 @@ function renderFireworks(location_store){
 }
 
 
+function preload() {
+  img = loadImage('indiamap.png');
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   colorMode(HSB);
@@ -58,31 +68,28 @@ function setup() {
   gravity = createVector(0, 0.2, 0);
 
   easycam = createEasyCam();
-  //easycam.zoom(-250);
+  easycam.zoom(-200);
   document.oncontextmenu = function() { return false; }
 }
 
 function draw() {
-	//colorMode(RGB);
 	background(0);
-	// rotateY(millis()/10000);
-	// rotateX(millis()/10000);
-  // plane(100, 60);
+	smooth() 
 
-  noFill();
-  strokeWeight(2);
+	noFill();
+	noStroke();
+ 	strokeWeight(2);
+ 	texture(img);
+ 	textureMode(NORMAL);
 
     push();
     angleMode(DEGREES);
-    rotateX(60);
+    rotateX(70);
+    rotateZ(-10);
+    rotateY(5);
     plane(MAP_WIDTH, MAP_HEIGHT);
     pop();
  
-
-
-  // text(current_user.name, 100, 100);
-  // text(current_user.lat, 100, 150);
-  // text(current_user.long, 100, 200);
 
   renderFireworks(store);
 

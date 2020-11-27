@@ -3,9 +3,9 @@
 function rose(theta, gamma, n=5, d=8)
 {
   let k = n/d;
-  console.log("n " +n);
-  console.log("d " +d);
-  console.log("k " +k);
+  // console.log("n " +n);
+  // console.log("d " +d);
+  // console.log("k " +k);
   let r = cos(k*theta);
   let x = r*cos(theta); // rotation of each particle
   let z = r*sin(theta);
@@ -20,11 +20,13 @@ function rose(theta, gamma, n=5, d=8)
 
 
 class Particle {
-  constructor(x, y, z, hu, firework, index, n, d) {
+  constructor(x, y, z, hu1, hu2, firework, index, n, d) {
     this.pos = createVector(x, y, z);
     this.firework = firework;
     this.lifespan = 255;
-    this.hu = hu;
+    this.hu;
+    this.hu1 = hu1; 
+    this.hu2 = hu2; 
     this.acc = createVector(0, 0, 0);
     if (this.firework) {
       this.vel = createVector(0, -2*burst_height/10,0); // height of burst
@@ -61,14 +63,14 @@ class Particle {
     colorMode(HSB);
 
     // alternate colours:
-    // if (col === true) {this.hu = long_map ; col = false} else { this.hu = lat_map ; col = true}
+    if (col === true) {this.hu = this.hu1 ; col = false} else { this.hu = this.hu2 ; col = true}
 
     if (!this.firework) {  // for the burst
-      strokeWeight(5);
+      strokeWeight(10);
       stroke(this.hu, 255, 255, this.lifespan); //[HSB, Alpha]
 
     } else {  // for the rocket
-      strokeWeight(5);
+      strokeWeight(10);
       stroke(this.hu, 255, 255);
     }
 
