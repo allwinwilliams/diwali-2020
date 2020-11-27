@@ -1,7 +1,28 @@
 html, body {
-  margin: 0;
-  padding: 0;
+  margin: 20px;
+  padding: 0px;
 }
+
 canvas {
   display: block;
+  margin-left:-40px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+
+}
+
+.btn {
+
+}
+
+.form-control {
+	max-width: 200px;
+}
+.sketch{}
+.sketch canvas{
+  position: absolute;
 }

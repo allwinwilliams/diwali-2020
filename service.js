@@ -1,4 +1,6 @@
 let store = {};
+
+let keys = [];
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
@@ -18,21 +20,44 @@ firebase.analytics();
 let database = firebase.database();
 
 function storeUser(name, lat, long, time) {
-  let userId = name;
-  firebase.database().ref('users').push({
+  let stored = firebase.database().ref('users').push({
     name,
     lat,
     long,
     time
   });
+  current_user.key = stored.key;
+  current_user.added = false;
 }
 
-function get_store(){
-  firebase.database().ref('users').once('value')
-    .then((snapshot) =>  {
-      store = snapshot.val();
-      console.log(store);
+function updateUser(key, name, lat, long, time){
+  // var updates = {};
+  // updates['/users/' + key] = postData;
+  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  //
+  firebase.database().ref(`/users/${key}`).update({
+    name,
+    lat,
+    long,
+    time
+  });
+  current_user.added = false;
+}
+
+firebase.database().ref('users').once('value')
+  .then((snapshot) =>  {
+    store = snapshot.val();
+    _.map(store, (user) =>{
+      user.added = false;
     });
-}
+    console.log(store);
+});
 
-get_store();
+firebase.database().ref('users').on("child_added", (snapshot, prevChildKey) => {
+  var newLocation = snapshot.val();
+  console.log('new post added...')
+  console.log(snapshot.key);
+  console.log(newLocation);
+  newLocation.added = false;
+  store[snapshot.key] = newLocation;
+});
