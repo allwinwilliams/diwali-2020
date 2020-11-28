@@ -9,8 +9,8 @@ var userSketch = function(sketch){
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
-    easycam.zoom(-50);
-    // document.oncontextmenu = function(){ return false; }
+    easycam.zoom(0);
+    document.oncontextmenu = function(){ return false; }
   }
 
   sketch.draw = function () {
@@ -25,7 +25,7 @@ var userSketch = function(sketch){
   }
 
   sketch.nameProcessing2 = function(name){
-  	let nl = sketch.round(sketch.unchar(sketch.split(name, '')));
+  	let nl = avg(sketch.unchar(sketch.split(name, '')));
   	// console.log(name + " " + nl); // nl has range of 0 - 122
   	return nl || 0;
   }
@@ -59,8 +59,8 @@ var userSketch = function(sketch){
 
     let name_val_1 = sketch.nameProcessing1(name);
     let name_val_2 = sketch.nameProcessing2(name);
-
-    location.firework = new Firework(sketch, 0, 0, 100, gravity, name_val_1, name_val_2, true);
+    console.log(user_time, name_val_1, name_val_2);
+    location.firework = new Firework(sketch, 0, 0, 10, gravity, name_val_1, name_val_2, true);
     location.added = true;
   }
 }

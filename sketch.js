@@ -26,7 +26,7 @@ var indiaSketch = function(sketch){
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
-    easycam.zoom(0);
+    easycam.zoom(-50);
     document.oncontextmenu = function(){ return false; }
   }
 
@@ -107,11 +107,6 @@ var indiaSketch = function(sketch){
       });
   }
 }
-
-// function mousePressed() {
-// 	overheadview();
-// }
-
 // function overheadview () {
 // let state = {
 //   distance : 250                 // scalar
