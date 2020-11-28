@@ -1,9 +1,10 @@
-const LAT_MIN = 8.066667;
+const LAT_MIN = 6.75;
 const LAT_MAX = 37.1;
 const LONG_MIN = 68.11667;
 const LONG_MAX = 97.41667;
+
 const TIME_MIN = 0;
-const TIME_MAX = 40;
+const TIME_MAX = 30;
 
 const CANVAS_WIDTH = 0;
 const CANVAS_HEIGHT = 0;
