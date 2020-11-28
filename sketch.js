@@ -2,8 +2,8 @@ const LAT_MIN = 8.066667;
 const LAT_MAX = 37.1;
 const LONG_MIN = 68.11667;
 const LONG_MAX = 97.41667;
-const TIME_MIN = 0;
-const TIME_MAX = 20;
+const TIME_MIN = 50;
+const TIME_MAX = 50.5;
 
 const CANVAS_WIDTH = 0;
 const CANVAS_HEIGHT = 0;
@@ -82,9 +82,10 @@ var indiaSketch = function(sketch){
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
-    last_time.setDate(last_time.getDate() - 0.125);
+    last_time.setDate(last_time.getDate() - 1);
     //last_time.setDate(last_time.getDate() -2);
     burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
+    console.log(location.name, burst_height);
    // console.log('usertime ' + user_time.getTime() + 'lasttime ' + last_time.getTime() + 'currenttime ' + current_time.getTime())
     if(burst_height < 0){
      return;
@@ -92,11 +93,10 @@ var indiaSketch = function(sketch){
 
     let name_val_1 = sketch.nameProcessing1(name);
     let name_val_2 = sketch.nameProcessing2(name);
-    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2) + 15;
-    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2) - 20;
+    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
+    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
 
-    location.firework = new Firework(sketch, 1, start_x, start_y, burst_height, gravity, name_val_1, name_val_2, true);
-
+    location.firework = new Firework(sketch, 1, start_x, start_y, 0, gravity, name_val_1, name_val_2);
     location.added = true;
   }
 
