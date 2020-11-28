@@ -18,18 +18,21 @@ function rose(sketch, theta, gamma, n=5, d=8){
 
 
 class Particle {
-  constructor(sketch, burst_height, x, y, z, firework, index, n, d) {
+  constructor(sketch, mult, burst_height, x, y, z, firework, index, n, d) {
     this.sketch = sketch;
     this.pos = this.sketch.createVector(x, y, z);
     this.firework = firework;
     this.lifespan = 255;
     this.acc = sketch.createVector(0, 0, 0);
+    this.mult = mult;
+    console.log('mult');
+    console.log(this.mult);
     if (this.firework) {
-      this.vel = this.sketch.createVector(0, -2*burst_height/10,0); // height of burst
+      this.vel = this.sketch.createVector(0, -2*burst_height/10, 0); // height of burst
     } else {
       this.sketch.angleMode(this.sketch.RADIANS);
       this.vel = rose(this.sketch, this.sketch.map(index, 0, 120, 0, this.sketch.PI*4), this.sketch.map(index, 0,120, -2*this.sketch.PI, 2*this.sketch.PI), n, d);
-      this.vel.mult(1); // explode form
+      this.vel.mult(this.mult + 1); // explode form
     }
   }
 
