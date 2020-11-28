@@ -2,10 +2,10 @@ var userSketch = function(sketch){
   let gravity;
   let start_x, start_y, burst_height;
 
-  sketch.setup =function() {
-    sketch.createCanvas(250, 250, sketch.WEBGL);
+  sketch.setup = function() {
+    sketch.createCanvas(sketch.windowWidth/3, sketch.windowWidth/3, sketch.WEBGL);
     sketch.colorMode(sketch.HSB);
-    sketch.background(0);
+    sketch.background('grey');
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
@@ -14,7 +14,7 @@ var userSketch = function(sketch){
   }
 
   sketch.draw =function () {
-  	sketch.background('grey');
+  	sketch.background(0);
   	sketch.smooth()
 
     sketch.renderFirework(current_user);

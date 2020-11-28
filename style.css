@@ -1,8 +1,41 @@
 html, body {
-  margin: 20px;
+  margin: 0px;
   padding: 0px;
 }
 
+.bg-black{
+  background-color: #000;
+}
+.black{
+  color: #000;
+}
+.white{
+  color: #fff;
+}
+button{
+  padding: 1em;
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: #000;
+}
+
+button:hover{
+  color: #000;
+  background-color: #fff;
+}
+
+input[type="text"]{
+  padding: 1em;
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: #000;
+}
+input[type="text"]:focus{
+  padding: 1em;
+  border: 1px solid #fff;
+  color: #fff;
+  background-color: #000;
+}
 canvas {
   display: block;
   margin-left:-40px;
@@ -24,5 +57,17 @@ canvas {
 }
 .sketch{}
 .sketch canvas{
-  position: absolute;
+  width: 50%;
+}
+#user-sketch-container canvas{
+  /* width: 50% !important; */
+}
+.how-to-use-note{
+  margin-top: 10em;
+}
+.how-to-use-note img{
+  width: 100px !important;
+}
+.header-end{
+  border-bottom: 1px solid #222;
 }

@@ -27,7 +27,7 @@ class Particle {
     } else {
       this.sketch.angleMode(this.sketch.RADIANS);
       this.vel = rose(this.sketch, this.sketch.map(index, 0, 120, 0, this.sketch.PI*4), this.sketch.map(index, 0,120, -2*this.sketch.PI, 2*this.sketch.PI), n, d);
-      this.vel.mult(1); // explode form
+      this.vel.mult(0.5); // explode form
     }
   }
 

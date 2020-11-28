@@ -3,7 +3,7 @@ const LAT_MAX = 37;
 const LONG_MIN = 69;
 const LONG_MAX = 97;
 const TIME_MIN = 0;
-const TIME_MAX = 30;
+const TIME_MAX = 20;
 
 const CANVAS_WIDTH = 0;
 const CANVAS_HEIGHT = 0;
@@ -68,7 +68,7 @@ var indiaSketch = function(sketch){
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
-    last_time.setDate(last_time.getDate() - 1);
+    last_time.setDate(last_time.getDate() - 0.125);
     burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
 
     if(burst_height < 0){

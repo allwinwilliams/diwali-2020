@@ -12,17 +12,39 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <div class="user-input">
-      <label for="name">Fireworks!</label>
-      <div class="form-group">
-        <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="enter your name" />
-        <button class="btn btn-primary" onclick="getValues()">Submit</button>
-        <!-- <small id="nameHelp" class="form-text text-muted">enter some name</small> -->
+    <section id="header" class="bg-black white">
+      <div class="mx-5">
+        <div class="row pt-5">
+          <div class="col">
+            <em>NID Wali Diwali</em>
+            <h1 class="display-1">A firework for you!</h1>
+            <div class="user-input mt-5">
+              <label for="name">Enter your name to generate your unique symbol of celebration</label>
+              <div class="form-group">
+                <input type="text" class="rounded-0 mr-2" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="Your name..." />
+                <button class="" onclick="getValues()">Submit</button>
+                <!-- <small id="nameHelp" class="form-text text-muted">enter some name</small> -->
+              </div>
+            </div>
+            <div class="how-to-use-note mt-5 row">
+              <img class="col-3" src="./rotate-label.png" />
+              <div class="col-9">
+                <p>Hey << name >> </p>
+                <p>Use your mouse to rotate the scene</p>
+                <p>When you like the view, hit save and share.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div id="user-sketch-container" class="sketch"></div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div id="india-sketch-container" class=sketch></div>
-    <div id="user-sketch-container" class="sketch"></div>
+    </section>
+    <div class="header-end"></div>
+    <section id="india" class="bg-black white">
+      <div id="india-sketch-container" class=sketch></div>
+    </section>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
