@@ -60,7 +60,7 @@ var userSketch = function(sketch){
     let name_val_1 = sketch.nameProcessing1(name);
     let name_val_2 = sketch.nameProcessing2(name);
     console.log(user_time, name_val_1, name_val_2);
-    location.firework = new Firework(sketch, 10, 0, 200, 5, gravity, name_val_1, name_val_2, true);
+    location.firework = new Firework(sketch, 10, 0, 200, 5, gravity, name_val_1, name_val_2);
     location.added = true;
   }
 }

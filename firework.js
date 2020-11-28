@@ -5,20 +5,20 @@ const HUE_MIN = 0;
 const HUE_MAX = 255;
 
 class Firework {
-  constructor(sketch, mult, x, y, z, gravity, name_val_1, name_val_2, fw) {
+  constructor(sketch, mult, x, y=0, z, gravity, fw=true, name_val_1, name_val_2) {
     this.sketch = sketch;
     this.x = x;
     this.y = y;
-    this.burst_height = z;
+    this.z = z;
+    this.mult = mult;
     this.name_val_1 = name_val_1;
     this.name_val_2 = name_val_2;
+
     this.hu1 = sketch.map(this.name_val_1, 0, 20, HUE_MIN, HUE_MAX); // colour range
     this.hu2 = sketch.map(this.name_val_2, 0, 122, HUE_MIN, HUE_MAX);
-    this.firework = new Particle(this.sketch, mult, this.burst_height, this.x, 0, this.y, fw); // starting point
+    this.firework = new Particle(this.sketch, this.mult, this.x, this.y, this.z, fw); // starting point
     this.exploded = false;
     this.particles = [];
-    this.mult = mult;
-    this.burst_height = z;
     this.gravity = gravity;
   }
 
@@ -43,11 +43,12 @@ class Firework {
     })
   }
 
+
   explode() {
-    let n = this.sketch.int(this.sketch.map(this.name_val_1, 0, 20, 1, 7)); // SHAPE - spokes
-    let d = this.sketch.int(this.sketch.map (this.name_val_2, 10, 122, 1, 7)); // SHAPE - loops
+    let d = this.sketch.int(this.sketch.map(this.name_val_1 + this.sketch.map(this.x, -MAP_WIDTH/2, MAP_WIDTH/2, 0, 100), 0, 110, 1, 7)); // SHAPE - spokes
+    let n = this.sketch.int(this.sketch.map (this.name_val_2 + this.sketch.map(this.x, -MAP_HEIGHT/2, MAP_HEIGHT/2, 0, 50), 10, 180, 1, 7)) ; // SHAPE - loops
     for (let i = 0; i < 241; i++) {
-      const p = new Particle(this.sketch, this.mult, 0, this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, false, i, n, d);
+      const p = new Particle(this.sketch, this.mult, this.firework.pos.x, this.firework.pos.y, this.firework.pos.z, false, i, n, d);
       this.particles.push(p);
     }
   }
