@@ -1,15 +1,15 @@
-const LAT_MIN = 8;
-const LAT_MAX = 37;
-const LONG_MIN = 69;
-const LONG_MAX = 97;
+const LAT_MIN = 8.066667;
+const LAT_MAX = 37.1;
+const LONG_MIN = 68.11667;
+const LONG_MAX = 97.41667;
 const TIME_MIN = 0;
 const TIME_MAX = 20;
 
 const CANVAS_WIDTH = 0;
 const CANVAS_HEIGHT = 0;
 
-const MAP_WIDTH = 10 * (LONG_MAX - LONG_MIN);
-const MAP_HEIGHT = 10 * (LAT_MAX - LAT_MIN);
+const MAP_WIDTH = 20 * (LONG_MAX - LONG_MIN);
+const MAP_HEIGHT = 20 * (LAT_MAX - LAT_MIN);
 
 var indiaSketch = function(sketch){
   let gravity;
@@ -76,8 +76,8 @@ var indiaSketch = function(sketch){
     }
 
     let name_value = sketch.nameProcessing(name);
-    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
-    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
+    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2) + 25;
+    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2) + 15;
 
     location.firework = new Firework(sketch, start_x, start_y, burst_height, gravity, name_value, true);
     location.added = true;

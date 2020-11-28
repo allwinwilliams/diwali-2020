@@ -5,7 +5,7 @@ var userSketch = function(sketch){
   sketch.setup = function() {
     sketch.createCanvas(sketch.windowWidth/3, sketch.windowWidth/3, sketch.WEBGL);
     sketch.colorMode(sketch.HSB);
-    sketch.background('grey');
+    sketch.background(0);
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
