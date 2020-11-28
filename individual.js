@@ -1,6 +1,7 @@
 var userSketch = function(sketch){
   let gravity;
-  let start_x, start_y, burst_height;
+  let start_x, start_y, burst_height; 
+  let easycam;
 
   sketch.setup = function() {
     sketch.createCanvas(500, 500, sketch.WEBGL);
@@ -8,8 +9,8 @@ var userSketch = function(sketch){
     sketch.background(0);
     gravity = sketch.createVector(0, 0.2, 0);
 
-    easycam = sketch.createEasyCam();
-    easycam.zoom(0);
+    sketch.easycam = sketch.createEasyCam();
+    sketch.easycam.zoom(0);
     document.oncontextmenu = function(){ return false; }
   }
 
@@ -60,7 +61,7 @@ var userSketch = function(sketch){
     let name_val_1 = sketch.nameProcessing1(name);
     let name_val_2 = sketch.nameProcessing2(name);
     console.log(user_time, name_val_1, name_val_2);
-    location.firework = new Firework(sketch, 10, 0, 200, 5, gravity, name_val_1, name_val_2);
+    location.firework = new Firework(sketch, 8, 0, 10, 200, gravity, true, name_val_1, name_val_2);
     location.added = true;
   }
 }
