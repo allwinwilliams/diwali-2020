@@ -13,7 +13,7 @@ const MAP_HEIGHT = 20 * (LAT_MAX - LAT_MIN);
 
 var indiaSketch = function(sketch){
   let gravity;
-  let start_x, start_y, burst_height; easycam;
+  let start_x, start_y, burst_height, easycam;
 
   sketch.preload = function() {
     img = sketch.loadImage('indiamap.png');

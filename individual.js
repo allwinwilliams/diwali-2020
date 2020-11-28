@@ -3,7 +3,7 @@ var userSketch = function(sketch){
   let start_x, start_y, burst_height;
 
   sketch.setup = function() {
-    sketch.createCanvas(sketch.windowWidth/3, sketch.windowWidth/3, sketch.WEBGL);
+    sketch.createCanvas(500, 500, sketch.WEBGL);
     sketch.colorMode(sketch.HSB);
     sketch.background(0);
     gravity = sketch.createVector(0, 0.2, 0);
