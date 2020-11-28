@@ -15,8 +15,10 @@ function rose(sketch, theta, gamma, n=5, d=8){
 // http://codingtra.in
 // https://youtu.be/CKeyIbT3vXI
 
+
+
 class Particle {
-  constructor(sketch, x, y, z, firework, index, n, d, burst_height) {
+  constructor(sketch, burst_height, x, y, z, firework, index, n, d) {
     this.sketch = sketch;
     this.pos = this.sketch.createVector(x, y, z);
     this.firework = firework;

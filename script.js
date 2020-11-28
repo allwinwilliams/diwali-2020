@@ -14,9 +14,28 @@ let getLocation = () => {
 }
 
 getLocation();
+// $('#nameInput').val() = current_user.name || "";
 
 let getValues = () => {
   current_user.name = $('#nameInput').val();
   current_user.time = (new Date()).toString();
-  storeUser(current_user.name, current_user.lat, current_user.long, current_user.time);
+  current_user.added = false;
+  $('#add-to-map').show();
+  $('#save-user').show();
+  // storeUser(current_user.name, current_user.lat, current_user.long, current_user.time);
 }
+
+$('#add-to-map').hide();
+$('#save-user').hide();
+
+$('#add-to-map').click(() => {
+  storeUser(current_user.name, current_user.lat, current_user.long, current_user.time);
+});
+
+$('#save-user').click(() => {
+  userCanvas.save(`nid-diwali-${current_user.name || ""}.png`);
+})
+
+$('#save-map').click(() => {
+  indiaCanvas.save(`nid-diwali-map-${(new Date()).toString()}.png`);
+})

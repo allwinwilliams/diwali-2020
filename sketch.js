@@ -1,19 +1,19 @@
-const LAT_MIN = 8;
-const LAT_MAX = 37;
-const LONG_MIN = 69;
-const LONG_MAX = 97;
+const LAT_MIN = 8.066667;
+const LAT_MAX = 37.1;
+const LONG_MIN = 68.11667;
+const LONG_MAX = 97.41667;
 const TIME_MIN = 0;
-const TIME_MAX = 30;
+const TIME_MAX = 20;
 
 const CANVAS_WIDTH = 0;
 const CANVAS_HEIGHT = 0;
 
-const MAP_WIDTH = 10 * (LONG_MAX - LONG_MIN);
-const MAP_HEIGHT = 10 * (LAT_MAX - LAT_MIN);
+const MAP_WIDTH = 20 * (LONG_MAX - LONG_MIN);
+const MAP_HEIGHT = 20 * (LAT_MAX - LAT_MIN);
 
 var indiaSketch = function(sketch){
   let gravity;
-  let start_x, start_y, burst_height;
+  let start_x, start_y, burst_height, easycam;
 
   sketch.preload = function() {
     img = sketch.loadImage('indiamap.png');
@@ -26,7 +26,7 @@ var indiaSketch = function(sketch){
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
-    easycam.zoom(-200);
+    easycam.zoom(-50);
     document.oncontextmenu = function(){ return false; }
   }
 
@@ -51,9 +51,23 @@ var indiaSketch = function(sketch){
     sketch.renderFireworks(store);
   }
 
-  sketch.nameProcessing = function (name){
+  sketch.nameProcessing1 = function (name){
   	let namelength = sketch.str(name).length;
     return namelength || 0;
+  }
+
+  sketch.nameProcessing2 = function(name){
+  	let nl = avg(sketch.unchar(sketch.split(name, '')));
+  	// console.log(name + " " + nl); // nl has range of 0 - 122
+  	return nl || 0;
+  }
+
+  function avg(t) {
+    let sum = 0;
+    for (let item of t) {
+      sum += item;
+    }
+    return sum / 20;
   }
 
   sketch.renderFirework = function (location){
@@ -68,18 +82,21 @@ var indiaSketch = function(sketch){
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
-    last_time.setDate(last_time.getDate() - 1);
+    last_time.setDate(last_time.getDate() - 0.125);
+    //last_time.setDate(last_time.getDate() -2);
     burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
-
+   // console.log('usertime ' + user_time.getTime() + 'lasttime ' + last_time.getTime() + 'currenttime ' + current_time.getTime())
     if(burst_height < 0){
      return;
     }
 
-    let name_value = sketch.nameProcessing(name);
+    let name_val_1 = sketch.nameProcessing1(name);
+    let name_val_2 = sketch.nameProcessing2(name);
     start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
     start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
 
-    location.firework = new Firework(sketch, start_x, start_y, burst_height, gravity, name_value, true);
+    location.firework = new Firework(sketch, start_x, start_y, burst_height, gravity, name_val_1, name_val_2, true);
+
     location.added = true;
   }
 
@@ -90,6 +107,13 @@ var indiaSketch = function(sketch){
       });
   }
 }
+// function overheadview () {
+// let state = {
+//   distance : 250                 // scalar
+//   center   : [0, 0, 0],         // vector
+//   rotation : [0, 0, 90, 0],  // quaternion
+// 		};
+// 	easycam.setState(state, 1000); // animate to state over the period of 1 second
+// }
 
-
-new p5(indiaSketch, 'india-sketch-container');
+let indiaCanvas = new p5(indiaSketch, 'india-sketch-container');
