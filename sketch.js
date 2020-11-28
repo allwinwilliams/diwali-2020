@@ -2,8 +2,8 @@ const LAT_MIN = 8.066667;
 const LAT_MAX = 37.1;
 const LONG_MIN = 68.11667;
 const LONG_MAX = 97.41667;
-const TIME_MIN = 50;
-const TIME_MAX = 50.5;
+const TIME_MIN = 0;
+const TIME_MAX = 30;
 
 const CANVAS_WIDTH = 0;
 const CANVAS_HEIGHT = 0;
@@ -13,7 +13,7 @@ const MAP_HEIGHT = 20 * (LAT_MAX - LAT_MIN);
 
 var indiaSketch = function(sketch){
   let gravity;
-  let start_x, start_y, burst_height, easycam;
+  let start_x, start_z, burst_height, easycam;
 
   sketch.preload = function() {
     img = sketch.loadImage('indiamap.png');
@@ -42,9 +42,9 @@ var indiaSketch = function(sketch){
 
     sketch.push();
     sketch.angleMode(sketch.DEGREES);
-    sketch.rotateX(70);
-    sketch.rotateZ(-10);
-    sketch.rotateY(5);
+    sketch.rotateX(90);
+    // sketch.rotateZ(-10);
+    // sketch.rotateY(5);
     sketch.plane(MAP_WIDTH, MAP_HEIGHT);
     sketch.pop();
 
@@ -82,21 +82,22 @@ var indiaSketch = function(sketch){
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
-    last_time.setDate(last_time.getDate() - 1);
+    last_time.setDate(last_time.getDate() - 2);
     //last_time.setDate(last_time.getDate() -2);
-    burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
-    console.log(location.name, burst_height);
+    //burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
+    //console.log(location.name, burst_height);
    // console.log('usertime ' + user_time.getTime() + 'lasttime ' + last_time.getTime() + 'currenttime ' + current_time.getTime())
-    if(burst_height < 0){
-     return;
-    }
+    // if(burst_height < 0){
+    //  return;
+    // }
 
     let name_val_1 = sketch.nameProcessing1(name);
     let name_val_2 = sketch.nameProcessing2(name);
-    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
-    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
 
-    location.firework = new Firework(sketch, 1, start_x, start_y, 0, gravity, name_val_1, name_val_2);
+    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
+    start_z = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
+
+    location.firework = new Firework(sketch, 1, start_x, 0, start_z, gravity, true, name_val_1, name_val_2);
     location.added = true;
   }
 

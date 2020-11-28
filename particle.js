@@ -7,8 +7,8 @@ function rose(sketch, theta, gamma, n=5, d=8){
   // console.log("k " +k);
   let r = sketch.cos(k*theta);
   let x = r*sketch.cos(theta); // rotation of each particle
-  let z = r*sketch.sin(theta);
-  let y = r*sketch.sin(gamma*k); // gamma var contrib by Archit
+  let y = r*sketch.sin(theta);
+  let z = r*sketch.sin(gamma*k); // gamma var contrib by Archit
   return sketch.createVector(x, y, z);
 }
 // Daniel Shiffman
@@ -26,7 +26,7 @@ class Particle {
     this.acc = sketch.createVector(0, 0, 0);
     this.mult = mult;
     if (this.firework == true) {
-      this.vel = this.sketch.createVector(0, -2, 0); // height of burst
+      this.vel = this.sketch.createVector(0, -5, 0); // height of burst
     } else {
       this.sketch.angleMode(this.sketch.RADIANS);
       this.vel = rose(this.sketch, this.sketch.map(index, 0, 120, 0, this.sketch.PI*4), this.sketch.map(index, 0,120, -2*this.sketch.PI, 2*this.sketch.PI), n, d);

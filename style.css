@@ -42,6 +42,7 @@ canvas {
   margin-left:-40px;
 }
 
+
 .form-group {
 	display: flex;
 	flex-direction: row;
@@ -72,4 +73,5 @@ canvas {
 }
 .header-end{
   border-bottom: 1px solid #222;
+
 }
