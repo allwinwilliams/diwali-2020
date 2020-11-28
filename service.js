@@ -28,7 +28,6 @@ function storeUser(name, lat, long, time) {
   });
   current_user.key = stored.key;
   current_user.added = false;
-  console.log("user added....");
 }
 
 function updateUser(key, name, lat, long, time){

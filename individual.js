@@ -9,20 +9,33 @@ var userSketch = function(sketch){
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
-    easycam.zoom(-200);
-    document.oncontextmenu = function(){ return false; }
+    easycam.zoom(-50);
+    // document.oncontextmenu = function(){ return false; }
   }
 
-  sketch.draw =function () {
+  sketch.draw = function () {
   	sketch.background(0);
-  	sketch.smooth()
-
+  	sketch.smooth();
     sketch.renderFirework(current_user);
   }
 
-  sketch.nameProcessing = function (name){
+  sketch.nameProcessing1 = function (name){
   	let namelength = sketch.str(name).length;
     return namelength || 0;
+  }
+
+  sketch.nameProcessing2 = function(name){
+  	let nl = sketch.round(sketch.unchar(sketch.split(name, '')));
+  	// console.log(name + " " + nl); // nl has range of 0 - 122
+  	return nl || 0;
+  }
+
+  function avg(t) {
+    let sum = 0;
+    for (let item of t) {
+      sum += item;
+    }
+    return sum / 20;
   }
 
   sketch.renderFirework = function(location){
@@ -36,20 +49,20 @@ var userSketch = function(sketch){
       return;
     }
 
-    let {name, long, lat, time} = location;
+    let {name, long, lat, time} = {...location};
+
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
-    last_time.setDate(last_time.getDate() - 0.5);
-    burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
+    last_time.setDate(last_time.getDate() - 0.125);
+    //last_time.setDate(last_time.getDate() -2);
 
-    let name_value = sketch.nameProcessing(name);
-    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
-    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
+    let name_val_1 = sketch.nameProcessing1(name);
+    let name_val_2 = sketch.nameProcessing2(name);
 
-    location.firework = new Firework(sketch, start_x, start_y, burst_height, gravity, name_value, true);
+    location.firework = new Firework(sketch, 0, 0, 100, gravity, name_val_1, name_val_2, true);
     location.added = true;
   }
 }
 
-new p5(userSketch, 'user-sketch-container');
+let userCanvas = new p5(userSketch, 'user-sketch-container');

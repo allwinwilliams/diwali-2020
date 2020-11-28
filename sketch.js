@@ -63,12 +63,12 @@ var indiaSketch = function(sketch){
   }
 
   function avg(t) {
-  let sum = 0;
-  for (let item of t) {
-    sum += item;
+    let sum = 0;
+    for (let item of t) {
+      sum += item;
+    }
+    return sum / 20;
   }
-  return sum / 20;
-}
 
   sketch.renderFirework = function (location){
     if(location.added == true) {
@@ -121,9 +121,4 @@ var indiaSketch = function(sketch){
 // 	easycam.setState(state, 1000); // animate to state over the period of 1 second
 // }
 
-function save() {
-  save('DiwaliWishes_2020.png');
-  return false;
-}
-
-new p5(indiaSketch, 'india-sketch-container');
+let indiaCanvas = new p5(indiaSketch, 'india-sketch-container');

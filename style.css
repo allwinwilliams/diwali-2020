@@ -62,6 +62,7 @@ canvas {
 }
 #user-sketch-container canvas{
   /* width: 50% !important; */
+  margin: 0 auto !important;
 }
 .how-to-use-note{
   margin-top: 10em;
