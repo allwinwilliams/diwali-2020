@@ -26,7 +26,7 @@ var indiaSketch = function(sketch){
     gravity = sketch.createVector(0, 0.2, 0);
 
     easycam = sketch.createEasyCam();
-    easycam.zoom(-200);
+    easycam.zoom(0);
     document.oncontextmenu = function(){ return false; }
   }
 
