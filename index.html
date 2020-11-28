@@ -19,28 +19,30 @@
         <div class="row pt-5 mx-5">
           <div class="col-12 col-md-6">
             <em>NID Wali Diwali</em>
-            <h1 class="display-1 font-weight-bold">A firework for you!</h1>
+            <h1 class="display-3 font-weight-bold">A firework for you!</h1>
             <div class="user-input mt-5">
-              <label for="name">Enter your name to generate your unique symbol of celebration</label>
+              <label for="name"><h4>Enter your name to generate your unique symbol of celebration</h4></label>
               <div class="form-group">
-                <input type="text" class="rounded-0 mr-2" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="Your name..." />
+                <input type="text" class="rounded-0 mr-2" class="form-control" id="nameInput" aria-describedby="nameHelp" placeholder="Your name" />
                 <button class="" onclick="getValues()">Submit</button>
                 <!-- <small id="nameHelp" class="form-text text-muted">enter some name</small> -->
               </div>
             </div>
-            <div class="how-to-use-note mt-5 row">
+            <div class="how-to-use-note mt-5">
+              <p>Scroll down to see where all the celebrations are happening...</p>
+            </div>
+            <!-- <div class="how-to-use-note mt-5 row">
               <img class="col-3" src="./rotate-label.png" />
               <div class="col-9">
                 <p>Hey << name >> </p>
                 <p>Use your mouse to rotate the scene</p>
                 <p>When you like the view, hit save and share.</p>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="col-12 col-md-6 mx-auto text-center">
             <div id="user-sketch-container" class="sketch"></div>
             <button id="save-user" class="mx-1">Download this symbol</button>
-            <button id="add-to-map" class="mx-1">Add to map</button>
           </div>
         </div>
       </div>
@@ -48,8 +50,9 @@
     <div class="header-end"></div>
     <section id="india" class="bg-black white py-5">
       <div class="my-3 text-center">
-        <p>Check out where all the celebrations are happening</p>
-        <h4 class="display-4">Can you find your?</h4>
+        <p>All the celebrations 🎉</p>
+        <h4 class="display-4">Can you find yours?</h4>
+        <button id="add-to-map" class="mx-1">Add yours to map</button>
       </div>
       <div id="india-sketch-container" class="sketch"></div>
       <div class="text-center">

@@ -92,10 +92,10 @@ var indiaSketch = function(sketch){
 
     let name_val_1 = sketch.nameProcessing1(name);
     let name_val_2 = sketch.nameProcessing2(name);
-    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2);
-    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2);
+    start_x = sketch.map(long, LONG_MIN, LONG_MAX, -MAP_WIDTH/2, MAP_WIDTH/2) + 15;
+    start_y = sketch.map(lat, LAT_MAX, LAT_MIN, -MAP_HEIGHT/2, MAP_HEIGHT/2) - 20;
 
-    location.firework = new Firework(sketch, start_x, start_y, burst_height, gravity, name_val_1, name_val_2, true);
+    location.firework = new Firework(sketch, 1, start_x, start_y, burst_height, gravity, name_val_1, name_val_2, true);
 
     location.added = true;
   }
