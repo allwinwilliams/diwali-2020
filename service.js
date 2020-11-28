@@ -28,6 +28,7 @@ function storeUser(name, lat, long, time) {
   });
   current_user.key = stored.key;
   current_user.added = false;
+  $('#add-to-map').html(' ↓ Added to the map ↓ ');
 }
 
 function updateUser(key, name, lat, long, time){
