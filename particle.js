@@ -15,8 +15,10 @@ function rose(sketch, theta, gamma, n=5, d=8){
 // http://codingtra.in
 // https://youtu.be/CKeyIbT3vXI
 
+
+
 class Particle {
-  constructor(sketch, x, y, z, firework, index, n, d, burst_height) {
+  constructor(sketch, burst_height, x, y, z, firework, index, n, d) {
     this.sketch = sketch;
     this.pos = this.sketch.createVector(x, y, z);
     this.firework = firework;
@@ -27,7 +29,7 @@ class Particle {
     } else {
       this.sketch.angleMode(this.sketch.RADIANS);
       this.vel = rose(this.sketch, this.sketch.map(index, 0, 120, 0, this.sketch.PI*4), this.sketch.map(index, 0,120, -2*this.sketch.PI, 2*this.sketch.PI), n, d);
-      this.vel.mult(0.5); // explode form
+      this.vel.mult(1); // explode form
     }
   }
 
