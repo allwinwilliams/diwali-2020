@@ -90,11 +90,12 @@ var indiaSketch = function(sketch){
     let user_time = new Date(time);
     let current_time = new Date();
     let last_time = new Date();
-    last_time.setDate(last_time.getDate() -0.25);
+    last_time.setDate(last_time.getDate() - 200);
     //last_time.setDate(last_time.getDate() -2);
-    burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
+    // burst_height = sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), TIME_MIN, TIME_MAX);
+    burst_height = 15 + sketch.map(user_time.getTime(), last_time.getTime(), current_time.getTime(), 0, 5);;
     //console.log(location.name, burst_height);
-   // console.log('usertime ' + user_time.getTime() + 'lasttime ' + last_time.getTime() + 'currenttime ' + current_time.getTime())
+    // console.log('usertime ' + user_time.getTime() + 'lasttime ' + last_time.getTime() + 'currenttime ' + current_time.getTime())
     if(burst_height < 0){
       return;
      }
